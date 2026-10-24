@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Rowad — design tokens
+   One identity: dark charcoal foundation, turquoise interaction, amber torch
+   accent, warm paper for the memory section.
+   ========================================================================== */
+
+:root {
+  /* ---- Colour roles ---- */
+  --bg: #171918;
+  --surface: #202422;
+  --surface-raised: #29302d;
+
+  --text: #f5f3eb;
+  --muted: #b5bdb7;
+
+  --teal: #249f96;
+  --teal-light: #79e6d8;
+  --amber: #f39a1f;
+
+  --paper: #f3f0e6;
+  --ink: #18221f;
+
+  --border: rgba(245, 243, 235, 0.12);
+  --border-strong: rgba(245, 243, 235, 0.22);
+
+  /* Contrast-checked helpers */
+  --on-teal: #0b1513; /* text placed on --teal  → 5.5:1 */
+  --teal-deep: #0c6b61; /* teal text on --paper   → 5.2:1 */
+  --ink-muted: #4b5751; /* muted text on --paper  → 7.4:1 */
+  --paper-border: rgba(24, 34, 31, 0.16);
+  --paper-border-strong: rgba(24, 34, 31, 0.28);
+  --amber-deep: #8a4d05; /* amber text on --paper if ever needed */
+
+  /* ---- Type ---- */
+  --font-display: "Rowad Display", "Tajawal", "Noto Sans Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Rowad Text", "Tajawal", "Noto Sans Arabic", "Segoe UI", system-ui, sans-serif;
+
+  --fs-hero: clamp(44px, 5.8vw, 84px);
+  --fs-display: clamp(32px, 4.2vw, 60px);
+  --fs-h2: clamp(27px, 3.1vw, 42px);
+  --fs-h3: clamp(21px, 1.9vw, 27px);
+  --fs-lead: clamp(17px, 1.35vw, 20px);
+  --fs-body: clamp(16px, 1.15vw, 18px);
+  --fs-small: 14px;
+  --fs-kicker: 13px;
+
+  --lh-heading: 1.34;
+  --lh-body: 1.85;
+
+  /* ---- Geometry ---- */
+  --container: 1280px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --section-y: clamp(56px, 7.5vw, 120px);
+  --radius-card: 22px;
+  --radius-lg: 28px;
+  --radius-sm: 14px;
+  --radius-pill: 999px;
+  --btn-h: 52px;
+  --header-h: 78px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-fast: 180ms;
+  --dur: 420ms;
+  --dur-slow: 760ms;
+
+  /* ---- Elevation (restrained) ---- */
+  --shadow-card: 0 18px 40px -28px rgba(0, 0, 0, 0.85);
+  --shadow-raised: 0 26px 60px -32px rgba(0, 0, 0, 0.9);
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-h: 68px;
+  }
+}
