@@ -1,0 +1,15 @@
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 760px;
+}
+
+.section-head__title {
+  font-weight: 800;
+}
+
+.section-head__lead {
+  margin-block-start: 2px;
+  max-width: 58ch;
+}
