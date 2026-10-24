@@ -1,0 +1,183 @@
+.memory {
+  --gap: 12px;
+  --mosaic-h: clamp(420px, 40vw, 560px);
+  position: relative;
+}
+
+.memory__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(28px, 4.6vw, 72px);
+  align-items: center;
+}
+
+.memory__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.memory__title {
+  font-size: var(--fs-display);
+  font-weight: 800;
+  line-height: 1.28;
+  color: var(--ink);
+}
+
+.memory__body {
+  max-width: 40ch;
+  font-size: var(--fs-lead);
+  line-height: 1.9;
+  color: var(--ink-muted);
+}
+
+.memory__actions {
+  margin-block-start: 6px;
+}
+
+.memory__note {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  max-width: 40ch;
+}
+
+/* ---- Mosaic viewport ---------------------------------------------------- */
+.memory__stage {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.mosaic {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  height: var(--mosaic-h);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+}
+
+.mosaic__col {
+  min-width: 0;
+}
+
+.mosaic__track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  width: 100%;
+  animation: mosaic-drift var(--speed, 28s) linear infinite;
+  animation-delay: var(--phase, 0s);
+  will-change: transform;
+}
+
+/* middle column travels the other way */
+.mosaic__col:nth-child(2) .mosaic__track {
+  animation-direction: reverse;
+}
+
+.mosaic.is-suspended .mosaic__track {
+  animation-play-state: paused;
+}
+
+/* distance = one full sequence + one gap, so the loop is seamless */
+@keyframes mosaic-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, calc(-50% - var(--gap) * 0.5), 0);
+  }
+}
+
+.mosaic__tile {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  flex: none;
+  width: 100%;
+}
+
+.mosaic__tile > .tile {
+  height: 100%;
+}
+
+/* ---- Pause control ------------------------------------------------------ */
+.memory__pause {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  align-self: center;
+  min-height: 38px;
+  padding-inline: 14px;
+  border: 1px solid rgba(24, 34, 31, 0.2);
+  border-radius: var(--radius-pill);
+  color: rgba(24, 34, 31, 0.72);
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+}
+
+.memory__pause:hover {
+  color: var(--ink);
+  border-color: rgba(24, 34, 31, 0.4);
+  background: rgba(24, 34, 31, 0.05);
+}
+
+.memory__pause[aria-pressed="true"] {
+  color: var(--teal-deep);
+  border-color: rgba(12, 107, 97, 0.45);
+}
+
+@media (max-width: 960px) {
+  .memory__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .memory__copy {
+    order: 1;
+  }
+
+  .memory__stage {
+    order: 2;
+  }
+
+  .memory {
+    --mosaic-h: 400px;
+  }
+
+  .memory__body {
+    max-width: 52ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mosaic__track {
+    animation: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .memory {
+    --mosaic-h: 340px;
+    --gap: 9px;
+  }
+
+  .mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mosaic__col:nth-child(3) {
+    display: none;
+  }
+
+  .memory__note {
+    display: none;
+  }
+}
