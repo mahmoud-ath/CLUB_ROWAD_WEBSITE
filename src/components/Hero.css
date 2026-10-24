@@ -1,0 +1,160 @@
+.hero {
+  position: relative;
+  padding-block: clamp(26px, 3.2vw, 44px) clamp(30px, 4vw, 56px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Fine arcs borrowed from the logo's circular outline. */
+.hero__arc {
+  position: absolute;
+  inset-block-start: 46%;
+  inset-inline: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__arc svg {
+  width: 100%;
+  height: auto;
+}
+
+.hero__arc::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -180px;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  width: min(900px, 90vw);
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(36, 159, 150, 0.14), transparent 72%);
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(14px, 1.6vw, 20px);
+}
+
+.hero__badge {
+  font-size: 14px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+/* ---- Title -------------------------------------------------------------- */
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  line-height: 1.3;
+  max-width: 20ch;
+}
+
+.hero__line {
+  display: block;
+}
+
+.hero__accent {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero__underline {
+  position: absolute;
+  inset-inline: -4%;
+  inset-block-end: -0.1em;
+  width: 108%;
+  height: 0.16em;
+  color: var(--amber);
+  overflow: visible;
+}
+
+.hero__underline path {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: draw-underline 1100ms var(--ease-soft) 900ms forwards;
+}
+
+@keyframes draw-underline {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---- Supporting copy & actions ------------------------------------------ */
+.hero__intro {
+  max-width: 54ch;
+  font-size: var(--fs-lead);
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-block-start: 4px;
+}
+
+/* ---- Entrance -----------------------------------------------------------
+   Pure CSS so the copy is never hidden by a slow or failed script. */
+.hero__enter {
+  animation: hero-enter 760ms var(--ease-soft) both;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+.hero__title .line-inner {
+  animation: line-enter 1000ms var(--ease-soft) both;
+  animation-delay: var(--line-delay, 0ms);
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes line-enter {
+  from {
+    opacity: 0;
+    transform: translateY(150%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero__title {
+    font-size: clamp(44px, 11.6vw, 58px);
+    line-height: 1.34;
+  }
+
+  .hero__intro {
+    font-size: 16.5px;
+    line-height: 1.85;
+  }
+
+  .hero__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+}
