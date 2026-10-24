@@ -1,0 +1,129 @@
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  /* percentage padding scales with the tile's own width */
+  padding: 11% 9%;
+  border-radius: inherit;
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--tile-bg);
+  color: var(--tile-fg);
+  isolation: isolate;
+}
+
+/* Variant roles — text colours are chosen for contrast, not decoration. */
+.tile--teal {
+  --tile-bg: #249f96;
+  --tile-fg: #0b1513;
+  --tile-motif: rgba(11, 21, 19, 0.34);
+  --tile-ring: rgba(11, 21, 19, 0.18);
+}
+
+.tile--tealSoft {
+  --tile-bg: #79e6d8;
+  --tile-fg: #0b1f1c;
+  --tile-motif: rgba(11, 31, 28, 0.32);
+  --tile-ring: rgba(11, 31, 28, 0.16);
+}
+
+.tile--amber {
+  --tile-bg: #f39a1f;
+  --tile-fg: #1d1409;
+  --tile-motif: rgba(29, 20, 9, 0.3);
+  --tile-ring: rgba(29, 20, 9, 0.16);
+}
+
+.tile--paper {
+  --tile-bg: #f3f0e6;
+  --tile-fg: #18221f;
+  --tile-motif: rgba(24, 34, 31, 0.28);
+  --tile-ring: rgba(24, 34, 31, 0.14);
+}
+
+.tile--surface {
+  --tile-bg: #29302d;
+  --tile-fg: #f5f3eb;
+  --tile-motif: rgba(245, 243, 235, 0.3);
+  --tile-ring: rgba(245, 243, 235, 0.12);
+}
+
+.tile--dark {
+  --tile-bg: #171918;
+  --tile-fg: #f5f3eb;
+  --tile-motif: rgba(245, 243, 235, 0.26);
+  --tile-ring: rgba(245, 243, 235, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(245, 243, 235, 0.1);
+}
+
+.tile--ink {
+  --tile-bg: #18221f;
+  --tile-fg: #f3f0e6;
+  --tile-motif: rgba(243, 240, 230, 0.3);
+  --tile-ring: rgba(243, 240, 230, 0.14);
+}
+
+/* Fine circular outline from the logo, cropped by the tile. */
+.tile::after {
+  content: "";
+  position: absolute;
+  inset-block-start: -22%;
+  inset-inline-end: -24%;
+  width: 86%;
+  aspect-ratio: 1;
+  border: 1px solid var(--tile-ring);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.tile__motif {
+  position: absolute;
+  inset-block-start: 9%;
+  inset-inline-start: 8%;
+  width: 58cqw;
+  max-width: 160px;
+  color: var(--tile-motif);
+  pointer-events: none;
+}
+
+.tile__motif svg {
+  width: 100%;
+  height: auto;
+}
+
+.tile__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.28em;
+  text-align: start;
+}
+
+.tile__word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(19px, 21cqw, 46px);
+  line-height: 1.16;
+  color: var(--tile-fg);
+}
+
+.tile__note {
+  font-family: var(--font-body);
+  font-size: clamp(9px, 6cqw, 13px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--tile-fg);
+  opacity: 0.86;
+}
+
+.tile--photo {
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
+  display: block;
+}
