@@ -20,6 +20,13 @@
   --paper: #f3f0e6;
   --ink: #18221f;
 
+  /* ---- Light surface (أنشطتنا) ---- */
+  --mist: #f8f9fa;
+  --mist-ink: #18221f; /* 14.6:1 on --mist */
+  --mist-ink-muted: #4b5751; /* 7.4:1 on --mist */
+  --mist-border: rgba(24, 34, 31, 0.12);
+  --mist-border-strong: rgba(24, 34, 31, 0.26);
+
   --border: rgba(245, 243, 235, 0.12);
   --border-strong: rgba(245, 243, 235, 0.22);
 
