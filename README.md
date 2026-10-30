@@ -27,25 +27,40 @@ Requires Node 18+.
 ```
 index.html                     ← <html lang="ar" dir="rtl">, title, meta description, JSON-LD
 public/
-  favicon.svg
+  brand/
+    logo-rowad.png             ← ★ official logo (transparent PNG)
+    logo-mark-512.png          ← square, trimmed master used for the icons
+  favicon.ico · favicon.png · apple-touch-icon.png  ← generated from the logo
   fonts/                       ← self-hosted Tajawal WOFF2 (SIL OFL) — provisional
+  video/cinemaric_video.mp4    ← hero background loop
 docs/
-  brand.md                     ← how to install the official logo
+  brand.md                     ← how to replace the logo and regenerate the icons
   media.md                     ← how to add real club photographs / clips
   fonts.md                     ← notes on the provisional font files
 src/
   main.tsx                     ← design system first, then app
-  App.tsx                      ← page composition
+  App.tsx                      ← routes: home · /activities/<id> · 404
+  router.tsx                   ← minimal client router (usePathname / navigate / Link)
+  pages/
+    HomePage.tsx               ← the home sections, unchanged
+    ActivityPage.tsx           ← ★ one page per activity (alternating composition)
+    NotFoundPage.tsx
+  hooks/
+    useActiveSection.ts        ← header current-section mark
+    usePageMeta.ts             ← per-route title + meta description
   data/
     club.ts                    ← ★ all visitor-facing Arabic copy + source records
-    media.ts                   ← ★ gallery + memory-mosaic tiles (decorative or real)
-    activities.ts              ← ★ activity records (currently empty by design)
+    media.ts                   ← ★ gallery, memory-mosaic tiles, archive photo pool
+    activities.ts              ← ★ activity records + their cover photographs
+    activityDetails.ts         ← ★ per-activity story: intro, objectives, documented
+                                 entries (books, editions, courses, episodes) + links
   components/
     Header.tsx                 ← sticky header, desktop nav, accessible mobile menu
     Hero.tsx                   ← badge, headline, CTAs
     CurvedGallery.tsx          ← curved draggable gallery (rAF + pointer inertia)
     About.tsx                  ← intro + the three themes
-    Activities.tsx             ← verified cards or an honest empty state
+    Activities.tsx             ← أنشطتنا: horizontal accordion of activity strips
+    ActivityStory.tsx          ← story + documented entries on each activity page
     MemoryMosaic.tsx           ← paper section, 3-column vertical mosaic
     Podcast.tsx                ← «بودكاست خبرة» intro card
     Contact.tsx                ← closing CTA
@@ -76,6 +91,7 @@ src/components/*.css           ← component styles, all using the shared tokens
 | Gallery tiles (words, colours, motifs, photos) | `src/data/media.ts` → `galleryItems` |
 | Memory mosaic columns/tiles | `src/data/media.ts` → `mosaicColumns` |
 | Activities | `src/data/activities.ts` |
+| تفاصيل الأنشطة (الفكرة، الأهداف، اللقاءات، الحلقات، الروابط) | `src/data/activityDetails.ts` |
 | Page title, meta description, social meta | `index.html` |
 | Copyright year | automatic (`new Date().getFullYear()` in `Footer.tsx`) |
 
@@ -86,23 +102,48 @@ Fill in an entry in `src/data/activities.ts`:
 ```ts
 {
   id: 'talk-001',
-  title: 'عنوان اللقاء كما نُشر',
-  category: 'education',            // education | awareness | culture
-  categoryLabel: 'تعليم',
+  path: '/activities/talk-001',      // صفحة النشاط — تُربط بزرّ «اكتشف النشاط»
+  title: 'عنوان النشاط كما نُشر',
+  category: 'education',             // education | awareness | culture
+  categoryLabel: 'تعليم',            // اللافتة الظاهرة تحت الاسم
   description: 'وصف قصير من المنشور الأصلي.',
-  dateLabel: 'مارس 2025',           // اتركه فارغًا إن لم تتأكد — لا تخترع تواريخ
-  location: 'الحي الجامعي، طنجة',
-  poster: '/media/activity-001.jpg',
-  posterAlt: 'ملصق اللقاء…',
-  posterFit: 'contain',             // use 'contain' when cropping would hide text
-  sourceLabel: 'المنشور على إنستغرام',
-  sourceHref: 'https://www.instagram.com/p/…'
+  cover: '/media/activity-001.jpg',  // اتركه فارغًا إن لم توجد صورة موثّقة
+  coverAlt: 'وصف الصورة كما تُنشر في المصدر',
+  focus: '50% 40%',                  // object-position حين تُقصّ الصورة
+  motif: 'torch',                    // book | torch | arc | dots | spark | wave | ring
 }
 ```
 
-As soon as the array is non-empty, the section switches automatically from the
-empty state to a verified card grid. Filters are intentionally **not** implemented —
-the brief asks for filters only when the real volume makes them useful.
+Every record becomes one strip in the horizontal accordion. The selected strip
+expands to three times an inactive one, keeps its photograph in full colour, and
+fills the details row below with its category, description and a CTA that opens
+its own page. «بودكاست خبرة» is the initial selection; a record without `cover`
+shows an editorial gradient with its `motif` instead of a photograph. Filters are
+intentionally **not** implemented — the brief asks for filters only when the real
+volume makes them useful.
+
+### صفحات الأنشطة — activity pages
+
+Six real URLs, all served by the same build:
+
+| Route | Renders |
+| --- | --- |
+| `/` | home (all sections) |
+| `/activities/jalsat-kitab` … `/activities/your-suggestions` | `ActivityPage` for that record |
+| anything else | `NotFoundPage` |
+
+- The route is the record's `path`; nothing else needs registering.
+- Routing is one small module (`src/router.tsx`) — no router dependency. `Link`
+  renders a real `href`, so middle-click and ⌘/Ctrl-click still open new tabs.
+- Each activity page repeats the club identity rather than inventing facts: its
+  documented photo and caption, the club theme it belongs to (`club.themes`), its
+  place in the series, and the other five activities. The hero alternates the
+  text/photo sides by position in the list (`data-side`).
+- **Hosting:** the server must answer unknown paths with `index.html` (SPA
+  fallback) — Netlify `/* /index.html 200`, Vercel `rewrites`, or Nginx
+  `try_files $uri /index.html`. `bun run dev` and `bun run preview` already do it.
+- Section links from a sub-page use `/#about`-style URLs so they land on the home
+  page first; the header dropdown and the footer list every activity.
 
 ---
 
@@ -184,7 +225,7 @@ Once real photos exist, you can delete the two transparency notes:
 | --- | --- | --- |
 | 1 | **Official logo file** | ❌ not supplied — provisional SVG mark in use |
 | 2 | **Club photographs** (activities, memory) | ❌ not supplied — decorative editorial tiles in use |
-| 3 | **Verified activity archive** (titles, dates, places, sources) | ❌ none provided / inaccessible — honest empty state with Instagram link |
+| 3 | **Verified activity archive** (titles, dates, places, sources) | ⚠️ titles + descriptions come from `public/data/activities-overview.json`; no per-event dates yet |
 | 4 | **Podcast episode data** (title, guest, thumbnail, video URL) | ❌ none available — intro card + channel link only |
 | 5 | **Membership / registration flow** | ❌ does not exist → «انضم الآن» is deliberately absent |
 | 6 | **Contact email / phone / postal address** | ❌ not verified → deliberately absent (Instagram DM note shown instead) |
