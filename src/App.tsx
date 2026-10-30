@@ -1,13 +1,23 @@
+import { useEffect } from 'react'
 import { Header } from './components/Header'
-import { Hero } from './components/Hero'
-import { About } from './components/About'
-import { Activities } from './components/Activities'
-import { MemoryMosaic } from './components/MemoryMosaic'
-import { Podcast } from './components/Podcast'
-import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
+import { HomePage } from './pages/HomePage'
+import { ActivityPage } from './pages/ActivityPage'
+import { NotFoundPage } from './pages/NotFoundPage'
+import { findActivityByPath } from './data/activities'
+import { usePathname } from './router'
 
 export default function App() {
+  const pathname = usePathname()
+  const activity = findActivityByPath(pathname)
+
+  /* Deep links such as /#activities: scroll once the home page has mounted. */
+  useEffect(() => {
+    const id = window.location.hash.slice(1)
+    if (!id) return
+    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView())
+  }, [])
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -17,12 +27,13 @@ export default function App() {
       <Header />
 
       <main id="main" tabIndex={-1}>
-        <Hero />
-        <About />
-        <Activities />
-        <MemoryMosaic />
-        <Podcast />
-        <Contact />
+        {activity ? (
+          <ActivityPage key={activity.id} activity={activity} />
+        ) : pathname === '/' ? (
+          <HomePage />
+        ) : (
+          <NotFoundPage />
+        )}
       </main>
 
       <Footer />

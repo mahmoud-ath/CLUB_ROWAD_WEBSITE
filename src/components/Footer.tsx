@@ -1,5 +1,7 @@
 import { Brand } from './Logo'
-import { Instagram, YouTube } from './icons'
+import { Instagram, LinkedIn, YouTube } from './icons'
+import { Link } from '../router'
+import { activities } from '../data/activities'
 import { footer, navItems, socialLinks } from '../data/club'
 import './Footer.css'
 
@@ -8,6 +10,7 @@ const year = new Date().getFullYear()
 const socialIcon = {
   instagram: Instagram,
   youtube: YouTube,
+  linkedin: LinkedIn,
 } as const
 
 export function Footer() {
@@ -21,6 +24,19 @@ export function Footer() {
             <p className="site-footer__about">{footer.about}</p>
           </div>
 
+          <nav className="site-footer__col" aria-labelledby="footer-activities-title">
+            <h2 className="site-footer__title" id="footer-activities-title">
+              {footer.activitiesTitle}
+            </h2>
+            <ul className="site-footer__list site-footer__list--activities">
+              {activities.map((activity) => (
+                <li key={activity.id}>
+                  <Link to={activity.path}>{activity.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
           <nav className="site-footer__col" aria-labelledby="footer-nav-title">
             <h2 className="site-footer__title" id="footer-nav-title">
               {footer.navTitle}
@@ -28,7 +44,7 @@ export function Footer() {
             <ul className="site-footer__list">
               {navItems.map((item) => (
                 <li key={item.id}>
-                  <a href={item.href}>{item.label}</a>
+                  <Link to={`/${item.href}`}>{item.label}</Link>
                 </li>
               ))}
             </ul>

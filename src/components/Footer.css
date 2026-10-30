@@ -6,7 +6,9 @@
 
 .site-footer__top {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr) minmax(0, 0.9fr);
+  grid-template-columns:
+    minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 0.72fr)
+    minmax(0, 0.86fr);
   gap: clamp(28px, 4vw, 56px);
   padding-block-end: clamp(32px, 4vw, 48px);
 }
@@ -74,6 +76,11 @@
   opacity: 0.75;
 }
 
+/* الأنشطة في عمود واحد مقروء */
+.site-footer__list--activities {
+  gap: 8px;
+}
+
 .site-footer__bottom {
   display: flex;
   flex-wrap: wrap;
@@ -91,7 +98,7 @@
   margin: 0;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 1000px) {
   .site-footer__top {
     grid-template-columns: 1fr 1fr;
   }

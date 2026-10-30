@@ -104,6 +104,28 @@ export const YouTube = ({ size = 20, ...rest }: IconProps) => (
   </svg>
 )
 
+export const LinkedIn = ({ size = 20, ...rest }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.6}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    focusable="false"
+    {...rest}
+  >
+    <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" />
+    <path d="M7.4 10.6v6.1" />
+    <circle cx="7.4" cy="7.9" r="0.9" fill="currentColor" stroke="none" />
+    <path d="M11.2 16.7v-6.1" />
+    <path d="M11.2 13.3c0-1.6 1.1-2.6 2.5-2.6s2.5 1 2.5 2.6v3.4" />
+  </svg>
+)
+
 export const Mic = ({ size = 24, ...rest }: IconProps) => (
   <svg
     width={size}

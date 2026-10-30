@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Brand } from './Logo'
-import { ArrowForward, Close, Menu } from './icons'
+import { ArrowDown, ArrowForward, Close, Menu } from './icons'
+import { Link, usePathname } from '../router'
+import { activities } from '../data/activities'
 import { club, navItems, primaryCta } from '../data/club'
 import { useActiveSection } from '../hooks/useActiveSection'
 import './Header.css'
@@ -10,7 +12,11 @@ const sectionIds = navItems.map((item) => item.href.replace('#', ''))
 export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const active = useActiveSection(sectionIds)
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+  const observed = useActiveSection(sectionIds)
+  /* Outside the home page, «أنشطتنا» owns the current-page mark. */
+  const active = isHome ? observed : 'activities'
   const toggleRef = useRef<HTMLButtonElement | null>(null)
   const panelRef = useRef<HTMLDivElement | null>(null)
 
@@ -99,24 +105,55 @@ export function Header() {
         <nav className="site-nav" aria-label="القائمة الرئيسية">
           <ul className="site-nav__list">
             {navItems.map((item) => (
-              <li key={item.id}>
-                <a
+              <li
+                key={item.id}
+                className={
+                  item.id === 'activities'
+                    ? 'site-nav__item site-nav__item--menu'
+                    : 'site-nav__item'
+                }
+              >
+                <Link
                   className="site-nav__link"
-                  href={item.href}
+                  to={`/${item.href}`}
                   aria-current={active === item.id ? 'true' : undefined}
                 >
                   {item.label}
-                </a>
+                  {item.id === 'activities' && (
+                    <ArrowDown size={13} className="site-nav__chevron" aria-hidden="true" />
+                  )}
+                </Link>
+
+                {item.id === 'activities' && (
+                  <div className="site-nav__menu">
+                    <ul className="site-nav__menu-list">
+                      {activities.map((activity) => (
+                        <li key={activity.id}>
+                          <Link
+                            className="site-nav__menu-link"
+                            to={activity.path}
+                            aria-current={pathname === activity.path ? 'true' : undefined}
+                          >
+                            <span>{activity.title}</span>
+                            <span className="site-nav__menu-cat">
+                              {activity.categoryLabel}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
         </nav>
 
         <div className="site-header__actions">
-          <a className="btn btn--primary btn--sm site-header__cta" href={primaryCta.href}>
+          <Link className="btn btn--primary btn--sm site-header__cta" to={`/${primaryCta.href}`}>
             {primaryCta.label}
             <ArrowForward size={18} className="btn__icon" />
-          </a>
+          </Link>
 
           <button
             ref={toggleRef}
@@ -139,26 +176,46 @@ export function Header() {
             <ul className="mobile-menu__list">
               {navItems.map((item) => (
                 <li key={item.id}>
-                  <a
+                  <Link
                     className="mobile-menu__link"
-                    href={item.href}
+                    to={`/${item.href}`}
                     aria-current={active === item.id ? 'true' : undefined}
                     onClick={() => closeMenu(false)}
                   >
                     <span>{item.label}</span>
                     <ArrowForward size={18} />
-                  </a>
+                  </Link>
+
+                  {item.id === 'activities' && (
+                    <ul className="mobile-menu__sub">
+                      {activities.map((activity) => (
+                        <li key={activity.id}>
+                          <Link
+                            className="mobile-menu__sublink"
+                            to={activity.path}
+                            aria-current={pathname === activity.path ? 'true' : undefined}
+                            onClick={() => closeMenu(false)}
+                          >
+                            <span>{activity.title}</span>
+                            <span className="mobile-menu__subcat">
+                              {activity.categoryLabel}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>
-            <a
+            <Link
               className="btn btn--primary mobile-menu__cta"
-              href={primaryCta.href}
+              to={`/${primaryCta.href}`}
               onClick={() => closeMenu(false)}
             >
               {primaryCta.label}
               <ArrowForward size={18} className="btn__icon" />
-            </a>
+            </Link>
             <p className="mobile-menu__slogan">{club.slogan}</p>
           </nav>
         </div>
