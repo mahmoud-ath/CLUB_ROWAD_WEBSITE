@@ -16,6 +16,8 @@
  * NOT stock photographs and must never be presented as documentary images.
  */
 
+import { seededPick } from '../lib/seeded'
+
 export type TileVariant =
   | 'teal'
   | 'tealSoft'
@@ -43,8 +45,9 @@ export interface GalleryItem {
 
 export interface MosaicTile {
   id: string
-  variant: TileVariant
-  motif: MotifName
+  /** تُستعمل فقط حين لا توجد صورة (لوحة تحريرية) */
+  variant?: TileVariant
+  motif?: MotifName
   aspect: number
   word?: string
   note?: string
@@ -120,9 +123,40 @@ export const galleryItems: GalleryItem[] = [
   },
 ]
 
+/* ── أرشيف الصور — لقاءات النادي ────────────────────────────────────────── */
+
+export interface ArchivePhoto {
+  id: string
+  src: string
+  /** معرّف النشاط الذي تنتمي إليه الصورة، إن عُرف */
+  activity?: string
+}
+
+/**
+ * نسخ محسّنة (WebP بعرض 900px) من صور لقاءات النادي في `public/media/archive/`؛
+ * الملفات الأصلية محفوظة في `media-source/` خارج مجلد النشر. تُستعمل في فسيفساء
+ * «ذاكرة رواد» وفي شريط الأرشيف داخل صفحات الأنشطة.
+ */
+const photoSeries = [
+  { slug: 'rowad-academy', count: 8, activity: 'rowad-academy' },
+  { slug: 'sonaa-athir', count: 22, activity: 'sonaa-al-athir' },
+] as const
+
+export const archivePhotos: ArchivePhoto[] = photoSeries.flatMap((series) =>
+  Array.from({ length: series.count }, (_, index) => {
+    const n = String(index + 1).padStart(2, '0')
+    return {
+      id: `${series.slug}-${n}`,
+      src: `/media/archive/${series.slug}-${n}.webp`,
+      activity: series.activity,
+    }
+  }),
+)
+
 /* ── فسيفساء «ذاكرة رواد» ───────────────────────────────────────────────── */
 
-export const mosaicColumns: MosaicTile[][] = [
+/** الألواح التحريرية: نصوص النادي وزخارفه — الوصل والترتيب كما كانا */
+const editorialColumns: MosaicTile[][] = [
   [
     { id: 'm1', variant: 'paper', motif: 'book', aspect: 3 / 4, word: 'كتاب', note: 'صفحة تُفتح' },
     { id: 'm2', variant: 'teal', motif: 'wave', aspect: 1, word: 'حوار' },
@@ -148,3 +182,17 @@ export const mosaicColumns: MosaicTile[][] = [
     { id: 'm18', variant: 'tealSoft', motif: 'torch', aspect: 3 / 4, word: 'رواد', note: 'بخطى مستنيرة' },
   ],
 ]
+
+/**
+ * نسخة هجينة: كل لوحة تحتفظ بنصّها وزخرفتها وأبعادها، وتأخذ صورة من أرشيف
+ * النادي خلفيةً لها (اختيار ثابت ببذرة واحدة، وبلا تكرار بين الألواح).
+ */
+const mosaicPhotos = seededPick(archivePhotos, 18, 'memory-mosaic')
+
+export const mosaicColumns: MosaicTile[][] = editorialColumns.map((tiles, column) =>
+  tiles.map((tile, index) => ({
+    ...tile,
+    src: mosaicPhotos[column * tiles.length + index]?.src,
+  })),
+)
+

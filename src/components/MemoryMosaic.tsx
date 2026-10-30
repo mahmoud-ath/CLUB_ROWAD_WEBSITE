@@ -74,12 +74,13 @@ export function MemoryMosaic() {
                       aria-hidden={index >= tiles.length ? 'true' : undefined}
                     >
                       <EditorialTile
-                        variant={tile.variant}
-                        motif={tile.motif}
+                        variant={tile.variant ?? 'surface'}
+                        motif={tile.motif ?? 'arc'}
                         word={tile.word}
                         note={tile.note}
                         src={tile.src}
                         alt={tile.alt}
+                        overlay
                       />
                     </div>
                   ))}

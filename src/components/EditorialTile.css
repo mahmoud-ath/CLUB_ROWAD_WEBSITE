@@ -127,3 +127,70 @@
   padding: 0;
   display: block;
 }
+
+/* ---- Hybrid: photograph behind, the club's words and motif on top -------- */
+.tile--hybrid {
+  background: #101715;
+  --tile-fg: #f5f3eb;
+  --tile-motif: rgba(245, 243, 235, 0.5);
+  --tile-ring: rgba(245, 243, 235, 0.22);
+  --tile-tint: rgba(24, 34, 31, 0.4);
+}
+
+.tile--hybrid.tile--teal {
+  --tile-tint: rgba(36, 159, 150, 0.42);
+}
+
+.tile--hybrid.tile--tealSoft {
+  --tile-tint: rgba(121, 230, 216, 0.26);
+}
+
+.tile--hybrid.tile--amber {
+  --tile-tint: rgba(243, 154, 31, 0.36);
+}
+
+.tile--hybrid.tile--paper {
+  --tile-tint: rgba(243, 240, 230, 0.2);
+}
+
+.tile--hybrid.tile--surface {
+  --tile-tint: rgba(41, 48, 45, 0.38);
+}
+
+.tile--hybrid.tile--dark {
+  --tile-tint: rgba(23, 25, 24, 0.44);
+}
+
+.tile--hybrid.tile--ink {
+  --tile-tint: rgba(24, 34, 31, 0.44);
+}
+
+.tile__photo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) brightness(0.9);
+}
+
+/* حجاب يحفظ وضوح الكلمة فوق الصورة، بلون المحور */
+.tile__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 17, 15, 0.26) 0%,
+      rgba(10, 17, 15, 0.5) 55%,
+      rgba(10, 17, 15, 0.9) 100%
+    ),
+    var(--tile-tint);
+}
+
+.tile--hybrid .tile__word,
+.tile--hybrid .tile__note {
+  text-shadow: 0 2px 20px rgba(10, 17, 15, 0.65);
+}

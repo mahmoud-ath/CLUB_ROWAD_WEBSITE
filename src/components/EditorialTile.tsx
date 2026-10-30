@@ -16,6 +16,7 @@ export function EditorialTile({
   alt,
   label,
   className,
+  overlay = false,
 }: {
   variant: TileVariant
   motif: MotifName
@@ -25,11 +26,13 @@ export function EditorialTile({
   alt?: string
   label?: string
   className?: string
+  /** صورة خلفية + النص والزخرفة فوقها (النسخة الهجينة) */
+  overlay?: boolean
 }) {
   const description =
     label || `لوحة تحريرية${word ? ` بعنوان «${word}»` : ''}${note ? ` — ${note}` : ''}`
 
-  if (src) {
+  if (src && !overlay) {
     return (
       <img
         className={['tile', 'tile--photo', className].filter(Boolean).join(' ')}
@@ -38,6 +41,31 @@ export function EditorialTile({
         loading="lazy"
         decoding="async"
       />
+    )
+  }
+
+  /* النسخة الهجينة: الصورة خلفية، والنص والزخرفة فوقها */
+  if (src) {
+    return (
+      <div
+        className={['tile', 'tile--hybrid', `tile--${variant}`, className].filter(Boolean).join(' ')}
+        role="img"
+        aria-label={description}
+      >
+        <img className="tile__photo" src={src} alt={alt ?? ''} loading="lazy" decoding="async" />
+        <span className="tile__veil" aria-hidden="true" />
+
+        <span className="tile__motif" aria-hidden="true">
+          <Motif name={motif} />
+        </span>
+
+        {(word || note) && (
+          <span className="tile__body">
+            {word && <span className="tile__word">{word}</span>}
+            {note && <span className="tile__note">{note}</span>}
+          </span>
+        )}
+      </div>
     )
   }
 
