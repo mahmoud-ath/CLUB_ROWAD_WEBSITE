@@ -6,3 +6,6 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 *.tsbuildinfo
+
+# unreleased source scans (PNG masters)
+media-source
