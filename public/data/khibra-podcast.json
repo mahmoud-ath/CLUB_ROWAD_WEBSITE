@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "1.0.0",
+  "language": "ar",
+  "direction": "rtl",
+  "clubName": "نادي رواد",
+  "activity": {
+    "id": "khibra-podcast",
+    "slug": "khibra-podcast",
+    "path": "/activities/khibra-podcast",
+    "title": "بودكاست خبرة",
+    "category": "بودكاست فكري",
+    "summary": "حوارات مع شخصيات في الفكر والأدب والعلم، نستكشف من خلالها التجارب والمسارات ونناقش قضايا توسع آفاق المعرفة لدى الشباب.",
+    "coverImageId": null,
+    "galleryImageIds": [],
+    "details": {
+      "introduction": [
+        "بودكاست «خبرة» مبادرة ثقافية وفكرية أطلقها أعضاء نادي رواد إيمانًا بأهمية المعرفة في بناء الوعي، وبأن التجارب الإنسانية والفكرية مصدر غني للتعلم والإلهام.",
+        "يخلق البرنامج مساحة للحوار الجاد مع شخصيات بارزة في الفكر والأدب والعلم، لاستكشاف مساراتها وتجاربها ومناقشة قضايا تنمي التفكير النقدي وتوسع آفاق المعرفة لدى الشباب.",
+        "يربط «خبرة» التجارب بالأفكار، ويمنح الشباب فرصة للتأمل والنقاش واكتشاف زوايا جديدة لفهم الذات والمجتمع، ليصبح الحوار منطلقًا للتفكير وصناعة الأثر."
+      ],
+      "objectives": [
+        "استكشاف التجارب الإنسانية والفكرية والتعلم منها.",
+        "تنمية التفكير النقدي وتوسيع آفاق المعرفة.",
+        "تشجيع التأمل والنقاش وفهم الذات والمجتمع."
+      ],
+      "sections": []
+    },
+    "entries": [
+      {
+        "id": "episode-1",
+        "kind": "episode",
+        "title": "القراءة المنتجة وشعر المتنبي",
+        "number": 1,
+        "summary": "حوار مع أيمن العتوم حول القراءة المنتجة وشعر المتنبي.",
+        "date": null,
+        "dateStatus": "not_provided",
+        "venue": null,
+        "status": "released",
+        "description": [
+          "حوار مع أيمن العتوم حول القراءة المنتجة وشعر المتنبي."
+        ],
+        "topics": [
+          {
+            "title": "القراءة المنتجة",
+            "description": null
+          },
+          {
+            "title": "شعر المتنبي",
+            "description": null
+          }
+        ],
+        "people": [
+          {
+            "name": "أيمن العتوم",
+            "role": "كاتب",
+            "imageId": null
+          }
+        ],
+        "book": null,
+        "schedule": [],
+        "coverImageId": null,
+        "galleryImageIds": [],
+        "links": []
+      },
+      {
+        "id": "episode-2",
+        "kind": "episode",
+        "title": "العلم الطبيعي وإشكالاته",
+        "number": 2,
+        "summary": "حوار مع محمد أمين خُلال حول العلم الطبيعي وإشكالاته.",
+        "date": null,
+        "dateStatus": "not_provided",
+        "venue": null,
+        "status": "released",
+        "description": [
+          "حوار مع محمد أمين خُلال حول العلم الطبيعي وإشكالاته."
+        ],
+        "topics": [
+          {
+            "title": "العلم الطبيعي",
+            "description": null
+          },
+          {
+            "title": "إشكالات العلم",
+            "description": null
+          }
+        ],
+        "people": [
+          {
+            "name": "محمد أمين خُلال",
+            "role": "دكتور",
+            "imageId": null
+          }
+        ],
+        "book": null,
+        "schedule": [],
+        "coverImageId": null,
+        "galleryImageIds": [],
+        "links": []
+      },
+      {
+        "id": "episode-3",
+        "kind": "episode",
+        "title": "العلمانية والإصلاح الديني",
+        "number": 3,
+        "summary": "حوار مع إدريس الكنبوري حول العلمانية والإصلاح الديني.",
+        "date": null,
+        "dateStatus": "not_provided",
+        "venue": null,
+        "status": "released",
+        "description": [
+          "حوار مع إدريس الكنبوري حول العلمانية والإصلاح الديني."
+        ],
+        "topics": [
+          {
+            "title": "العلمانية",
+            "description": null
+          },
+          {
+            "title": "الإصلاح الديني",
+            "description": null
+          }
+        ],
+        "people": [
+          {
+            "name": "إدريس الكنبوري",
+            "role": "دكتور",
+            "imageId": null
+          }
+        ],
+        "book": null,
+        "schedule": [],
+        "coverImageId": null,
+        "galleryImageIds": [],
+        "links": []
+      },
+      {
+        "id": "episode-4",
+        "kind": "episode",
+        "title": "واقع الكتاب والكتابة والنشر",
+        "number": 4,
+        "summary": "حوار مع عبد المجيد سباطة حول واقع الكتاب والكتابة والنشر.",
+        "date": null,
+        "dateStatus": "not_provided",
+        "venue": null,
+        "status": "released",
+        "description": [
+          "حوار مع عبد المجيد سباطة حول واقع الكتاب والكتابة والنشر."
+        ],
+        "topics": [
+          {
+            "title": "واقع الكتاب",
+            "description": null
+          },
+          {
+            "title": "الكتابة",
+            "description": null
+          },
+          {
+            "title": "النشر",
+            "description": null
+          }
+        ],
+        "people": [
+          {
+            "name": "عبد المجيد سباطة",
+            "role": "روائي",
+            "imageId": null
+          }
+        ],
+        "book": null,
+        "schedule": [],
+        "coverImageId": null,
+        "galleryImageIds": [],
+        "links": []
+      },
+      {
+        "id": "episode-5",
+        "kind": "episode",
+        "title": "الهوية والذاكرة والنهضة",
+        "number": 5,
+        "summary": "حوار مع علي الإدريسي حول الهوية والذاكرة والنهضة.",
+        "date": null,
+        "dateStatus": "not_provided",
+        "venue": null,
+        "status": "released",
+        "description": [
+          "حوار مع علي الإدريسي حول الهوية والذاكرة والنهضة."
+        ],
+        "topics": [
+          {
+            "title": "الهوية",
+            "description": null
+          },
+          {
+            "title": "الذاكرة",
+            "description": null
+          },
+          {
+            "title": "النهضة",
+            "description": null
+          }
+        ],
+        "people": [
+          {
+            "name": "علي الإدريسي",
+            "role": "دكتور",
+            "imageId": null
+          }
+        ],
+        "book": null,
+        "schedule": [],
+        "coverImageId": null,
+        "galleryImageIds": [],
+        "links": []
+      }
+    ],
+    "sourceIds": [
+      "khibra-user-text"
+    ],
+    "links": [],
+    "home": {
+      "visible": true,
+      "order": 5,
+      "ctaLabel": "اكتشف النشاط"
+    }
+  },
+  "assets": {},
+  "sources": [
+    {
+      "id": "khibra-user-text",
+      "fileName": null,
+      "method": "user_supplied_text"
+    }
+  ],
+  "editorial": {
+    "notForPublicRendering": true,
+    "contentPolicy": "صياغة موجزة ومفصلة اعتمادًا على المصادر المقدمة. عناوين الحلقات وصفية مستخلصة من الموضوعات، وليست عناوين رسمية مؤكدة.",
+    "integration": {
+      "detail": "Render activity.details and activity.entries; resolve image IDs in assets.",
+      "images": "Resolve each image ID in assets. src contains a ready-to-use JPEG data URI. Images are embedded once; they may be exported to files and src replaced with hosted URLs.",
+      "emptyValues": "null means unknown or not supplied; [] means no documented items. Hide empty fields.",
+      "dates": "Dates are ISO 8601. Do not display a date when dateStatus is needs_confirmation.",
+      "routing": "path values are proposed website routes, not published URLs."
+    },
+    "reviewItems": [
+      {
+        "activityId": "khibra-podcast",
+        "field": "media",
+        "status": "not_provided",
+        "note": "لم تقدم صور أو روابط مشاهدة أو تواريخ نشر الحلقات."
+      }
+    ]
+  }
+}
