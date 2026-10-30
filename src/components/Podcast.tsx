@@ -1,11 +1,7 @@
 import { LineHeading, Reveal } from './Reveal'
-import { YouTube } from './icons'
+import { ArrowForward, Play, YouTube } from './icons'
 import { links, podcast } from '../data/club'
 import './Podcast.css'
-
-const WAVE = [
-  28, 54, 38, 76, 46, 92, 60, 34, 68, 100, 52, 40, 84, 58, 30, 72, 48, 88, 36, 62, 96, 44, 66, 32,
-]
 
 export function Podcast() {
   return (
@@ -38,24 +34,55 @@ export function Podcast() {
             <p className="podcast__note">{podcast.honestyNote}</p>
           </div>
 
-          <div className="podcast__visual" aria-hidden="true">
-            <span className="podcast__halo" />
-            <span className="podcast__wordmark">
-              <span>خبرة</span>
+          <figure className="podcast__visual">
+            <span className="podcast__halo" aria-hidden="true" />
+            <img
+              className="podcast__poster"
+              src={podcast.poster.src}
+              alt={podcast.poster.alt}
+              width={1024}
+              height={1536}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </Reveal>
+
+        <Reveal className="podcast__latest-wrap" delay={90}>
+          <a
+            className="podcast__latest"
+            href={podcast.latest.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="podcast__latest-media">
+              <img
+                src={podcast.latest.thumbnail}
+                alt=""
+                width={1280}
+                height={720}
+                loading="lazy"
+                decoding="async"
+              />
+              <span className="podcast__latest-play" aria-hidden="true">
+                <Play size={16} />
+              </span>
             </span>
-            <div className="podcast__wave">
-              {WAVE.map((height, index) => (
-                <span
-                  key={index}
-                  style={{
-                    height: `${height}%`,
-                    animationDelay: `${index * 90}ms`,
-                  }}
-                />
-              ))}
-            </div>
-            <span className="podcast__caption">بودكاست نادي رواد</span>
-          </div>
+
+            <span className="podcast__latest-copy">
+              <span className="podcast__latest-label">{podcast.latest.label}</span>
+              <span className="podcast__latest-title">
+                {podcast.latest.episode} — {podcast.latest.guest}
+              </span>
+              <span className="podcast__latest-sub">{podcast.latest.title}</span>
+            </span>
+
+            <span className="podcast__latest-go">
+              <YouTube size={16} />
+              {podcast.latest.watch}
+              <ArrowForward size={16} />
+            </span>
+          </a>
         </Reveal>
       </div>
     </section>
