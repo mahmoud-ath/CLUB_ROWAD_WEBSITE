@@ -92,7 +92,8 @@ strong {
   border-radius: 4px;
 }
 
-.on-paper :focus-visible {
+.on-paper :focus-visible,
+.on-mist :focus-visible {
   outline-color: var(--teal-deep);
 }
 
@@ -116,6 +117,12 @@ strong {
 .on-paper {
   background: var(--paper);
   color: var(--ink);
+}
+
+/* Light surface used by «أنشطتنا» — clean, high-contrast, dark text. */
+.on-mist {
+  background: var(--mist);
+  color: var(--mist-ink);
 }
 
 .visually-hidden {
@@ -168,7 +175,8 @@ strong {
   opacity: 0.7;
 }
 
-.on-paper .kicker {
+.on-paper .kicker,
+.on-mist .kicker {
   color: var(--teal-deep);
 }
 
@@ -184,7 +192,8 @@ strong {
   max-width: 62ch;
 }
 
-.on-paper .lead {
+.on-paper .lead,
+.on-mist .lead {
   color: var(--ink-muted);
 }
 
@@ -304,11 +313,13 @@ strong {
   transform: translateX(-4px);
 }
 
-.on-paper .link-arrow {
+.on-paper .link-arrow,
+.on-mist .link-arrow {
   color: var(--ink);
 }
 
-.on-paper .link-arrow:hover {
+.on-paper .link-arrow:hover,
+.on-mist .link-arrow:hover {
   color: var(--teal-deep);
 }
 
@@ -353,6 +364,9 @@ strong {
 
 .brand-mark--image {
   object-fit: contain;
+  /* الشعار الرسمي شفّاف: يُعرض كما هو، بلا قرص ولا قصّ دائري */
+  border-radius: 0;
+  background: transparent;
 }
 
 .brand__text {

@@ -1,20 +1,16 @@
 import { club } from '../data/club'
+import { Link } from '../router'
 
 /**
- * ⚠️ PROVISIONAL BRAND MARK — REPLACE WITH THE OFFICIAL LOGO FILE
- * ---------------------------------------------------------------
- * The official artwork was not supplied with the build. This mark is a
- * temporary, clearly-declared placeholder drawn from the described elements
- * (open book • torch • circular outline • turquoise + orange on dark) so the
- * layout can be evaluated in its real proportions.
+ * BRAND MARK
+ * ----------
+ * The official logo is installed at /brand/logo-rowad.png and `logoSrc` in
+ * src/data/club.ts points at it, so this component normally renders that image
+ * (transparent, kept in proportion, never clipped into a disc).
  *
- * To install the real logo:
- *   1. put the file in /public/brand/ (PNG/SVG, ideally square, 512px+)
- *   2. set `logoSrc` in src/data/club.ts to e.g. '/brand/logo-rowad.png'
- *   3. update `logoAlt` with a description of the real artwork
- * The component below then renders the official image instead of this mark,
- * inside the same rounded, dark-backed frame (the logo's own dark background
- * is kept, never faked as transparent).
+ * The inline SVG below is kept only as a fallback for when `logoSrc` is emptied
+ * — it is a hand-drawn stand-in (open book • torch • arc), not the club logo.
+ * See docs/brand.md for replacing the artwork and regenerating the favicons.
  */
 export function Logo({
   size = 44,
@@ -99,7 +95,7 @@ export function Logo({
 
 /** Wordmark lockup: logo on the inline-start side, Arabic name + Latin label. */
 export function Brand({
-  href = '#top',
+  href = '/',
   size = 44,
   className,
 }: {
@@ -108,7 +104,7 @@ export function Brand({
   className?: string
 }) {
   return (
-    <a className={['brand', className].filter(Boolean).join(' ')} href={href}>
+    <Link className={['brand', className].filter(Boolean).join(' ')} to={href}>
       <Logo size={size} />
       <span className="brand__text">
         <span className="brand__name">{club.name}</span>
@@ -116,6 +112,6 @@ export function Brand({
           {club.latinName}
         </span>
       </span>
-    </a>
+    </Link>
   )
 }

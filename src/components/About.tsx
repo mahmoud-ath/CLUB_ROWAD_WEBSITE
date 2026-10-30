@@ -9,6 +9,19 @@ export function About() {
       <div className="container">
         <div className="about__head">
           <div className="about__headline">
+            {club.logoSrc && (
+              <span className="about__emblem" aria-hidden="true">
+                <img
+                  src={club.logoSrc}
+                  alt=""
+                  width={104}
+                  height={104}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+            )}
+
             <span className="kicker">{about.kicker}</span>
             <LineHeading
               as="h2"
