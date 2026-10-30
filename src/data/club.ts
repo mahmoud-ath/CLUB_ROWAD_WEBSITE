@@ -25,7 +25,7 @@ export interface ClubTheme {
 }
 
 export interface ClubLink {
-  id: 'instagram' | 'youtube' | 'facebook'
+  id: 'instagram' | 'youtube' | 'facebook' | 'linkedin'
   label: string
   latinLabel: string
   href: string
@@ -49,9 +49,10 @@ export const club = {
   name: 'نادي رواد',
   latinName: 'Club Rowad',
   slogan: 'رواد… بخطى مستنيرة',
-  /** الشعار الرسمي. إن وُضع مسار صورة هنا تُستعمل بدل العلامة المؤقتة. */
-  logoSrc: '' as string,
-  logoAlt: 'شعار نادي رواد: كتاب مفتوح وشعلة داخل إطار دائري',
+  /** الشعار الرسمي (PNG بخلفية شفافة) — يُستعمل في الترويسة والتذييل وقسم «عن رواد» */
+  logoSrc: '/brand/logo-rowad.png' as string,
+  logoAlt:
+    'شعار نادي رواد: كتاب مفتوح باللون الفيروزي، وقوس علوي، وخطّ «وقلم» برتقالي تنطلق منه شعلة',
   themes: [
     {
       id: 'education',
@@ -129,9 +130,17 @@ export const links: Record<ClubLink['id'], ClubLink> = {
     handle: 'CLUBROWAD',
     actionLabel: 'صفحة النادي على فيسبوك',
   },
+  linkedin: {
+    id: 'linkedin',
+    label: 'لينكدإن',
+    latinLabel: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/club-rowad/',
+    handle: 'club-rowad',
+    actionLabel: 'صفحة النادي على لينكدإن',
+  },
 }
 
-export const socialLinks: ClubLink[] = [links.instagram, links.youtube]
+export const socialLinks: ClubLink[] = [links.instagram, links.youtube, links.linkedin]
 
 /* ── نصوص الأقسام ───────────────────────────────────────────────────────── */
 
@@ -140,6 +149,11 @@ export const hero = {
   headingLines: ['رواد…', 'بخطى مستنيرة'],
   /** الكلمة التي تُسطَّر بخط وامض مرسوم يدويًّا في العنوان */
   underlineWord: 'مستنيرة',
+  /** فيلم خلفية الواجهة: صامت، بلا تحكّم، ويعمل في حلقة بنصف الشفافية */
+  video: {
+    src: '/video/cinemaric_video.mp4',
+    label: 'مقطع من أنشطة نادي رواد',
+  },
   intro:
     'مساحة طلابية للمعرفة والحوار، نلتقي فيها حول الثقافة، ونفتح بها آفاقًا جديدة للتعلّم والمشاركة.',
   primaryCta: { label: 'اكتشف أنشطتنا', href: '#activities' },
@@ -167,14 +181,9 @@ export const activities = {
   kicker: 'أنشطتنا',
   titleLines: ['لقاءات تُبنى', 'على المعرفة والحوار'],
   intro:
-    'نُوثّق هنا ما ننظّمه فعلًا: العنوان، التاريخ، المكان، والمصدر. لا نضيف ما لم يقع.',
-  empty: {
-    title: 'الأرشيف قيد التوثيق',
-    body: 'لم نُدرج بعدُ أنشطةً مؤكَّدة بتاريخها ومصدرها على هذا الموقع. نفضّل أن يظهر كل نشاط كما وقع تمامًا، لا كما نتمنّاه. إلى أن يكتمل الأرشيف، تجدون أحدث اللقاءات على حساب النادي.',
-    primaryLabel: 'آخر الأنشطة على إنستغرام',
-    secondaryLabel: 'شاهد القناة على يوتيوب',
-  },
-  detailLabel: 'اكتشف التفاصيل',
+    'مساحات للقراءة والحوار والتكوين واكتشاف المعرفة. اختر نشاطًا من القائمة لتقرأ ما نفعله فيه.',
+  tablistLabel: 'أنشطة نادي رواد',
+  detailLabel: 'اكتشف النشاط',
 }
 
 export const memory = {
@@ -183,17 +192,32 @@ export const memory = {
   body: 'من لقاء إلى آخر، تتشكّل ذاكرة رواد بما نتعلّمه، وما نتشاركه، ومن نلتقي بهم.',
   ctaLabel: 'تابع لحظاتنا على إنستغرام',
   mosaicLabel: 'فسيفساء ذاكرة رواد',
-  note: 'ألواح تحريرية بالألوان والخط نفسه، تُستبدل بصور النادي حين تتوفّر.',
+  note: 'ألواح تحريرية بالألوان والخط نفسه، بينها لقطات من لقاءات النادي.',
 }
 
 export const podcast = {
   kicker: 'إعلام النادي',
   title: 'بودكاست خبرة',
   intro: 'حوارات تفتح باب السؤال، وتقرّبنا من الأفكار والتجارب.',
+  /** ملصق حلقة حقيقية من البودكاست */
+  poster: {
+    src: '/media/podcast/Khebra_guests.webp',
+    alt: 'ملصق بودكاست خبرة: خمسة ضيوف أمام مذياعاتهم، والشعار أعلى الصورة، واسم البودكاست في أسفلها',
+  },
   body: 'في «خبرة» نستضيف تجارب وأصواتًا نتعلم منها: مسارات، دروس، وأسئلة لم تُطرح بعد. الحلقات تُنشر على قناة النادي على يوتيوب.',
   ctaLabel: 'استكشف القناة',
+  /** أحدث حلقة على يوتيوب — العنوان والضيف كما وردا في الفيديو الرسمي */
+  latest: {
+    label: 'أحدث حلقة',
+    episode: 'الحلقة 05',
+    guest: 'د. علي الإدريسي',
+    title: 'الهوية، الذاكرة، والنهضة… من الخطابي إلى مالك بن نبي',
+    href: 'https://www.youtube.com/watch?v=6u8XKa2_x24',
+    watch: 'شاهد الحلقة',
+    thumbnail: '/media/podcast/ep-05.webp',
+  },
   honestyNote:
-    'لا نعرض هنا حلقات بأعيانها بعد؛ نُفضّل ذكر كل حلقة بعنوانها وضيفها من مصدرها الرسمي.',
+    'لقطة من إحدى الحلقات؛ عناوين الحلقات وضيوفها تُذكر كما وردت في المصدر الرسمي.',
 }
 
 export const contact = {
@@ -210,9 +234,38 @@ export const footer = {
   about: 'نادٍ ثقافي طلابي · طنجة، المغرب',
   navTitle: 'أقسام الموقع',
   socialTitle: 'تابعنا',
+  activitiesTitle: 'الأنشطة',
   copyrightOwner: 'نادي رواد',
   copyrightSuffix: 'جميع الحقوق محفوظة.',
   credit: 'تعليم · توعية · ثقافة',
+}
+
+/* ── صفحات الأنشطة ─────────────────────────────────────────────────────── */
+
+export const activityPage = {
+  crumbsLabel: 'مسار التنقّل',
+  home: 'الرئيسية',
+  themeKicker: 'ضمن محاور رواد',
+  facts: {
+    theme: 'المحور',
+    label: 'اللافتة',
+    order: 'الترتيب في الأنشطة',
+    source: 'المصدر',
+  },
+  sourceNote: 'آخر ما نُشر عن النشاط على حساب النادي',
+  instagramCta: 'تابع تفاصيل النشاط',
+  allActivities: 'كل الأنشطة',
+  othersTitle: 'أنشطة أخرى',
+  othersLead: 'ستة أبواب في فضاء واحد؛ اختر ما يقرّبك من رواد.',
+  archiveTitle: 'من أرشيف رواد',
+  archiveLead: 'لقطات من لقاءات النادي.',
+  backHome: 'العودة إلى الرئيسية',
+  notFound: {
+    code: '404',
+    title: 'الصفحة غير موجودة',
+    body: 'الرابط الذي فتحته لا يقابل صفحة على هذا الموقع. عُد إلى الرئيسية، أو تابع الأنشطة من قائمتها.',
+    back: 'العودة إلى الرئيسية',
+  },
 }
 
 /* ── المصادر الموثّقة ───────────────────────────────────────────────────── */
