@@ -5,6 +5,36 @@
   isolation: isolate;
 }
 
+/* ---- Background film ----------------------------------------------------
+   Behind the copy, below the arcs: a muted loop at half opacity over the
+   page colour, then a soft veil so the Arabic headline keeps its contrast. */
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.199;
+}
+
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(23, 25, 24, 0.7) 0%,
+    rgba(23, 25, 24, 0.56) 34%,
+    rgba(23, 25, 24, 0.34) 64%,
+    rgba(23, 25, 24, 0.8) 100%
+  );
+}
+
 /* Fine arcs borrowed from the logo's circular outline. */
 .hero__arc {
   position: absolute;
@@ -93,6 +123,13 @@
   font-size: var(--fs-lead);
   line-height: 1.9;
   color: var(--muted);
+}
+
+/* ظلّ خفيف يحفظ وضوح النص فوق أفتح مناطق الفيلم */
+.hero__title,
+.hero__intro,
+.hero__badge {
+  text-shadow: 0 2px 26px rgba(23, 25, 24, 0.9), 0 1px 3px rgba(23, 25, 24, 0.55);
 }
 
 .hero__actions {

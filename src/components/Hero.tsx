@@ -1,14 +1,32 @@
 import { ArrowForward } from './icons'
 import { CurvedGallery } from './CurvedGallery'
+import { useReducedMotion } from './Reveal'
 import { hero } from '../data/club'
 import './Hero.css'
 
 export function Hero() {
   const [firstLine, secondLine] = hero.headingLines
   const [before, after] = secondLine.split(hero.underlineWord)
+  const reduced = useReducedMotion()
 
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
+      {/* خلفية متحركة: فيلم النادي، في حلقة صامتة بتمويه 50% */}
+      <div className="hero__media" aria-hidden="true">
+        <video
+          className="hero__video"
+          src={hero.video.src}
+          autoPlay={!reduced}
+          muted
+          loop
+          playsInline
+          preload="auto"
+          tabIndex={-1}
+          disablePictureInPicture
+        />
+        <span className="hero__veil" />
+      </div>
+
       <div className="hero__arc" aria-hidden="true">
         <svg viewBox="0 0 1440 520" fill="none" preserveAspectRatio="none">
           <path d="M-60 470C290 170 1150 170 1500 470" stroke="rgba(121,230,216,0.1)" strokeWidth="1" />
